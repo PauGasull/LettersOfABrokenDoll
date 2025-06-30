@@ -1,0 +1,67 @@
+{
+  "column_properties": {
+    "res://": {
+      "metadata/_custom_type_script": {
+        "visibility": 0
+      },
+      "resource_local_to_scene": {
+        "visibility": 0
+      },
+      "resource_name": {
+        "visibility": 0
+      }
+    },
+    "res://Letters/": {
+      "metadata/_custom_type_script": {
+        "visibility": 0
+      },
+      "resource_local_to_scene": {
+        "visibility": 0
+      },
+      "resource_name": {
+        "visibility": 0
+      }
+    },
+    "res://Letters/Letters.csv": {
+      "metadata/_custom_type_script": {
+        "visibility": 0
+      },
+      "resource_local_to_scene": {
+        "visibility": 0
+      },
+      "resource_name": {
+        "visibility": 0
+      }
+    },
+    "res://Letters/Letters_table_import.tres": {
+      "metadata/_custom_type_script": {
+        "visibility": 0
+      },
+      "resource_local_to_scene": {
+        "visibility": 0
+      },
+      "resource_name": {
+        "visibility": 0
+      }
+    },
+    "res://addons/": {
+      "metadata/_custom_type_script": {
+        "visibility": 0
+      },
+      "resource_local_to_scene": {
+        "visibility": 0
+      },
+      "resource_name": {
+        "visibility": 0
+      }
+    }
+  },
+  "recent_paths": [
+    "res://Letters/",
+    "res://addons/",
+    "res://Letters/Letters_table_import.tres"
+  ],
+  "table_functions": {
+
+  }
+}
