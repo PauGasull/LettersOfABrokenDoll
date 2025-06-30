@@ -1,0 +1,67 @@
+{
+  "COM001": {
+	"root_block": "P1",
+	"blocks": {
+	  "P1": {
+		"prompt": "Comences la teva carta. Tria com salutaries Ku’umi:",
+		"options": {
+		  "A": {
+			"short_text": "Hola Ku’umi,",
+			"long_text": "Hola estimada Ku’umi,\n",
+			"next": "P2"
+		  },
+		  "B": {
+			"short_text": "Benvolguda Ku’umi,",
+			"long_text": "Benvolguda Ku’umi,\n",
+			"next": "P2"
+		  },
+		  "C": {
+			"short_text": "Ku’umi, saluts.",
+			"long_text": "Ku’umi, t’envio un afectuós salüt,\n",
+			"next": "P2"
+		  }
+		}
+	  },
+	  "P2": {
+		"prompt": "Explica com et trobes:",
+		"options": {
+		  "A": {
+			"short_text": "Em sento tremolós i nerviós.",
+			"long_text": "Actualment em sento tremolós i amb el cor accelerat, com si una tempesta interior em sacsegi.\n",
+			"next": "P3"
+		  },
+		  "B": {
+			"short_text": "He trobat un objecte estrany.",
+			"long_text": "He descobert un objecte estrany, cobert d’arrels i símbols desconeguts.\n",
+			"next": "P3"
+		  },
+		  "C": {
+			"short_text": "Estic sol/a en aquesta habitació.",
+			"long_text": "Em trobo sol·licitant companyia dins aquesta cambra silenciosa i freda.\n",
+			"next": "P3"
+		  }
+		}
+	  },
+	  "P3": {
+		"prompt": "Finalitzes la carta amb:",
+		"options": {
+		  "A": {
+			"short_text": "Amb esperança,",
+			"long_text": "Amb tota l’esperança del món,\n",
+			"next": null
+		  },
+		  "B": {
+			"short_text": "Amb por,",
+			"long_text": "Amb la por com a llum fugissera,\n",
+			"next": null
+		  },
+		  "C": {
+			"short_text": "Amb curiositat,",
+			"long_text": "Amb curiositat insondable,\n",
+			"next": null
+		  }
+		}
+	  }
+	}
+  }
+}

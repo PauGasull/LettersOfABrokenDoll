@@ -1,0 +1,23 @@
+{
+  "COM001": {
+	"paths": {
+	  "A_A_A": {
+		"blocks": [ "R1", "R2", "R3" ]
+	  },
+	  "A_B_C": {
+		"blocks": [ "R4", "R5" ]
+	  },
+	  "B_C_B": {
+		"blocks": [ "R6" ]
+	  }
+	},
+	"responses": {
+	  "R1": { "content": "Hola de nou… em preocupa la teva sacsejada." },
+	  "R2": { "content": "Vols explicar-me per què tremoles?" },
+	  "R3": { "content": "Estic aquí, escoltant-te atentament." },
+	  "R4": { "content": "L’objecte estrany brilla amb una llum tènue." },
+	  "R5": { "content": "Creus que pot ser un missatge ocult?" },
+	  "R6": { "content": "La por és una companya fidel de la nit." }
+	}
+  }
+}
