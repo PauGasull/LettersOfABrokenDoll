@@ -1,6 +1,6 @@
 # Letters of a Broken Doll
 
-**Intrigue** · **Difficulty: Medium** · **Engine: Godot** · **Status: In Progress**
+**Intrigue** · **Difficulty: Medium** · **Engine: Godot 4.4** · **Status: In Progress**
 
 > 💡 Can you help a distant friend escape certain death?
 
