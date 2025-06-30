@@ -1,6 +1,4 @@
-# Project Overview
-
-This project implements a branching letter-exchange mechanic between a player and the character **Ku’umi**, using three separate JSON documents:
+Branching letter-exchange mechanic between a player and the character **Ku’umi**, using three separate JSON documents:
 
 1. **composition.json**: Defines the *composition templates* for the player’s letters, structured as mini decision trees.
 2. **letter.json**: Specifies *per-letter metadata*, such as delivery delays.
