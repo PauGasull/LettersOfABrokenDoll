@@ -1,3 +1,46 @@
-[gd_scene format=3 uid="uid://plpdvtg1le8q"]
+[gd_scene load_steps=4 format=3 uid="uid://plpdvtg1le8q"]
 
-[node name="Node2D" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://bma2w44748swj" path="res://Sprites/Background.png" id="1_jjgbg"]
+[ext_resource type="Script" uid="uid://cvi1mb8hatnn8" path="res://Scripts/clickable.gd" id="3_8gbba"]
+[ext_resource type="Script" uid="uid://w2g6glccsgau" path="res://Scripts/game_manager.gd" id="4_jjvhh"]
+
+[node name="Node" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1286.0
+offset_bottom = 706.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("1_jjgbg")
+stretch_mode = 5
+
+[node name="ComputerClicker" type="ColorRect" parent="CanvasLayer/TextureRect"]
+layout_mode = 0
+offset_left = 322.0
+offset_top = 729.0
+offset_right = 847.0
+offset_bottom = 1062.0
+color = Color(1, 1, 1, 0.176471)
+script = ExtResource("3_8gbba")
+
+[node name="AlbumsClicker" type="ColorRect" parent="CanvasLayer/TextureRect"]
+layout_mode = 0
+offset_left = 1560.0
+offset_top = 841.818
+offset_right = 2085.0
+offset_bottom = 1174.82
+color = Color(1, 1, 1, 0.176471)
+script = ExtResource("3_8gbba")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(700, 400)
+
+[node name="Game Manager" type="Node" parent="."]
+script = ExtResource("4_jjvhh")

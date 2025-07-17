@@ -23,10 +23,11 @@ resources_spreadsheet_view/freeze_first_column=true
 
 [application]
 
-config/name="LettersOfABrokenDoll"
+config/name="Letters Of A Broken Doll"
 run/main_scene="uid://plpdvtg1le8q"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0, 0, 0, 1)
+config/icon="uid://d3oouso5bgwlw"
 
 [autoload]
 
@@ -34,8 +35,12 @@ LetterManager="*res://Scripts/letter_manager.gd"
 
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=false
 window/size/extend_to_title=true
 window/size/no_focus=true
+window/stretch/mode="viewport"
 
 [editor]
 
@@ -50,3 +55,4 @@ enabled=PackedStringArray("res://addons/resources_spreadsheet_view/plugin.cfg")
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

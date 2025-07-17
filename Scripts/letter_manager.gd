@@ -20,12 +20,14 @@ var conversation: Array = []  # cada entrada: { type: "sent"/"received", text: S
 
 
 func _ready() -> void:
+	print("[Letter Manager] Loaded")
 	comp_data   = _load_json("res://Letters/composition.json")
 	letter_meta = _load_json("res://Letters/letter.json")
 	resp_data   = _load_json("res://Letters/responses.json")
 
 
 func _load_json(path: String) -> Dictionary:
+	print("[Letter Manager] Loading Json (" + path + ")")
 	var f = FileAccess.open(path, FileAccess.READ)
 	var txt = f.get_as_text()
 	f.close()
@@ -38,6 +40,7 @@ func _load_json(path: String) -> Dictionary:
 
 
 func start_letter(template_id: String) -> void:
+	print("[Letter Manager] Start Letter")
 	current_template = template_id
 	current_block    = comp_data[template_id].root_block
 	choice_path.clear()
@@ -46,6 +49,7 @@ func start_letter(template_id: String) -> void:
 
 
 func choose_option(option_id: String) -> void:
+	print("[Letter Manager] Choose Option")
 	var block = comp_data[current_template].blocks[current_block]
 	# Afegim el long_text a la carta
 	player_letter += block.options[option_id].long_text
@@ -59,6 +63,7 @@ func choose_option(option_id: String) -> void:
 
 
 func _emit_prompt() -> void:
+	print("[Letter Manager] Emit Prompt")
 	var block = comp_data[current_template].blocks[current_block]
 	var opts: Dictionary = {}
 	for id in block.options.keys():
@@ -67,6 +72,7 @@ func _emit_prompt() -> void:
 
 
 func send_letter() -> void:
+	print("[Letter Manager] Send Letter")
 	# Emetem la carta enviada
 	emit_signal("letter_sent", player_letter)
 	# Afegim a l’històric
@@ -79,6 +85,7 @@ func send_letter() -> void:
 
 
 func _schedule_response() -> void:
+	print("[Letter Manager] Schedule Response")
 	var delay = letter_meta[current_template].delay_seconds
 	var timer = get_tree().create_timer(delay)
 	# Connectem el timeout amb Callable
@@ -86,6 +93,7 @@ func _schedule_response() -> void:
 
 
 func _on_response_timeout() -> void:
+	print("[Letter Manager] On Response Timeout")
 	# Construïm la clau del camí: "A_B_C"
 	var key = ""
 	for i in range(choice_path.size()):
