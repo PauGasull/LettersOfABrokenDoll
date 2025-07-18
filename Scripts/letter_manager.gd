@@ -20,10 +20,11 @@ var conversation: Array = []  # cada entrada: { type: "sent"/"received", text: S
 
 
 func _ready() -> void:
-	print("[Letter Manager] Loaded")
-	comp_data   = _load_json("res://Letters/composition.json")
-	letter_meta = _load_json("res://Letters/letter.json")
-	resp_data   = _load_json("res://Letters/responses.json")
+        print("[Letter Manager] Loaded")
+        comp_data   = _load_json("res://Letters/composition.json")
+        letter_meta = _load_json("res://Letters/letter.json")
+        resp_data   = _load_json("res://Letters/responses.json")
+        _deliver_initial_letter()
 
 
 func _load_json(path: String) -> Dictionary:
@@ -93,7 +94,7 @@ func _schedule_response() -> void:
 
 
 func _on_response_timeout() -> void:
-	print("[Letter Manager] On Response Timeout")
+        print("[Letter Manager] On Response Timeout")
 	# Construïm la clau del camí: "A_B_C"
 	var key = ""
 	for i in range(choice_path.size()):
@@ -112,4 +113,13 @@ func _on_response_timeout() -> void:
 		"text": reply_text,
 		"timestamp": Time.get_unix_time_from_system() as int
 	})
-	emit_signal("letter_received", reply_text)
+        emit_signal("letter_received", reply_text)
+
+func _deliver_initial_letter() -> void:
+        var text = "Benvolguda, aquesta és la primera carta de Ku'umi."
+        conversation.append({
+                "type": "received",
+                "text": text,
+                "timestamp": Time.get_unix_time_from_system() as int
+        })
+        emit_signal("letter_received", text)
