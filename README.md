@@ -39,4 +39,3 @@ See [LICENSE.md](LICENSE) for details.
 
 * **Pau Gasull** · Programmer
 * **Roc “Ondo” Humet** · Writer
-* **huchi57huchi57** · Aspect Ratio Enforcer
