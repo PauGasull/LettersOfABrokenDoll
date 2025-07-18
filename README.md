@@ -33,9 +33,10 @@
 
 ## 📜 License
 
-See [LICENSE](LICENSE) for details.
+See [LICENSE.md](LICENSE) for details.
 
 ## 🤝 Credits
 
 * **Pau Gasull** · Programmer
 * **Roc “Ondo” Humet** · Writer
+* **huchi57huchi57** · Aspect Ratio Enforcer
