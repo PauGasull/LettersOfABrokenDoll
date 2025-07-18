@@ -51,6 +51,10 @@ version_control/autoload_on_startup=true
 
 enabled=PackedStringArray("res://addons/resources_spreadsheet_view/plugin.cfg")
 
+[global_group]
+
+Clickable="Grup de tots els objectes interactuables"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

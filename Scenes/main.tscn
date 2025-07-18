@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://plpdvtg1le8q"]
+[gd_scene load_steps=6 format=3 uid="uid://plpdvtg1le8q"]
 
 [ext_resource type="Texture2D" uid="uid://bma2w44748swj" path="res://Sprites/Background.png" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://cvi1mb8hatnn8" path="res://Scripts/clickable.gd" id="3_8gbba"]
-[ext_resource type="Texture2D" uid="uid://nmg8i16y1bms" path="res://Sprites/Letter.png" id="3_jjvhh"]
+[ext_resource type="Texture2D" uid="uid://nmg8i16y1bms" path="res://Sprites/Letter_icon.png" id="3_jjvhh"]
 [ext_resource type="Script" uid="uid://w2g6glccsgau" path="res://Scripts/game_manager.gd" id="4_jjvhh"]
+[ext_resource type="Texture2D" uid="uid://dc6322ygcnnrp" path="res://Sprites/TextArea.png" id="4_kry3j"]
 
 [node name="Node" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [397.0]
@@ -44,12 +45,47 @@ script = ExtResource("3_8gbba")
 
 [node name="ColorRect" type="TextureRect" parent="CanvasLayer/TextureRect"]
 layout_mode = 0
-offset_left = 1118.0
-offset_top = 1060.0
-offset_right = 3440.0
-offset_bottom = 3382.0
+offset_left = 1165.45
+offset_top = 914.545
+offset_right = 2820.45
+offset_bottom = 2950.55
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("3_jjvhh")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 145.0
+offset_top = -180.0
+offset_right = 187.0
+offset_bottom = 326.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.85, 0.3)
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("4_kry3j")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/TextureRect"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/PanelContainer/TextureRect/VBoxContainer"]
+layout_mode = 2
+text = "TEST 1"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer/PanelContainer/TextureRect/VBoxContainer"]
+layout_mode = 2
+text = "Test 2"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer/PanelContainer/TextureRect/VBoxContainer"]
+layout_mode = 2
+text = "Test 3
+"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(700, 400)
