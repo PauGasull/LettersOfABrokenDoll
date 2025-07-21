@@ -1,7 +1,7 @@
+using System;
 using System.IO;
 using UnityEngine;
 using System.Collections.Generic;
-
 
 [System.Serializable]
 public class GameStateData
@@ -15,15 +15,36 @@ public class GameStateData
 
 public static class SaveSystem
 {
-    // Utilitzem una extensió custon .loabd
+    // Utilitzem una extensió custom .loabd
     static string SavePath => Path.Combine(Application.persistentDataPath, "save.loabd");
 
-    static const string HEADER = "Letters of a Broken Doll - Save File (v1) \n";
-    static const string WARNING = "# DO NOT EDIT MANUALLY # \n";
-    static const string FOOTER = "== END OF SAVE ==";
+    const string HEADER  = "Letters of a Broken Doll - Save File (v1) \n";
+    const string WARNING = "# DO NOT EDIT MANUALLY # \n";
+    const string FOOTER  = "== END OF SAVE ==";
 
+    /***
+    * DeleteAllSaveFiles(): Elimina tots els fitxers de desament
+    * PRE: --
+    * POST: S'esborra save.loabd si existeix
+    ***/
+    public static void DeleteAllSaveFiles()
+    {
+        // Si el fitxer existeix, l'eliminem
+        if (File.Exists(SavePath))
+            File.Delete(SavePath);
+    }
+
+    /***
+    * SaveGame(): Desa l'estat del joc en un fitxer custom
+    * PRE: GameManager.Instance no és null
+    * POST: S'escriu save.loabd amb l'estat actual, si deleteSaveState està desactivat
+    ***/
     public static void SaveGame()
     {
+        // Si deleteSaveState està actiu, no guardem cap partida
+        if (GameManager.Instance != null && GameManager.Instance.deleteSaveState)
+            return;
+
         // Creaem un data object obtenint l'estat actual de la partida
         GameStateData data = new GameStateData
         {
@@ -41,34 +62,49 @@ public static class SaveSystem
         string wrapped =
             HEADER +
             WARNING +
-            json + "\n" + // CONTINGUT
+            json + "\n" +
             FOOTER;
 
-        // Guardem l'arxiu com a fitxer a SavePath
+        // Guardem l'arxiu a SavePath
         File.WriteAllText(SavePath, wrapped);
         Debug.Log("Game State saved on: " + SavePath);
     }
 
+    /***
+    * LoadGame(): Carrega l'estat del joc de save.loabd
+    * PRE: --
+    * POST: Si deleteSaveState està actiu, esborra el fitxer i retorna false;
+    *       Si el fitxer no existeix, retorna false;
+    *       Altrament, llegeix, parseja i aplica l'estat
+    ***/
     public static bool LoadGame()
     {
-        // Si el fixter no existeix, no tenim res a carregar
+        // Si deleteSaveState està actiu, eliminem els saves i no carreguem
+        if (GameManager.Instance != null && GameManager.Instance.deleteSaveState)
+        {
+            DeleteAllSaveFiles();
+            return false;
+        }
+
+        // Si el fitxer no existeix, no tenim res a carregar
         if (!File.Exists(SavePath))
             return false;
 
-        // Llegim totes les linies del fitxer 
+        // Llegim totes les línies del fitxer
         string[] lines = File.ReadAllLines(SavePath);
 
-        // Trobem l'index del warning, el JSON comença a la seguent linia
+        // Trobem l'index de WARNING i a partir de la següent línia comença el JSON
         int start = Array.IndexOf(lines, WARNING) + 1;
-        int end = Array.IndexOf(lines, FOOTER); // Acaba a l'index del FOOTER
+        // Trobem l'index de FOOTER per saber on acaba el JSON
+        int end   = Array.IndexOf(lines, FOOTER);
 
-        // Extreiem el JSON entre start <-> end
+        // Extreiem el JSON entre les línies start i end
         string json = string.Join("\n", lines, start, end - start);
 
         // Convertim el JSON a un data object
         GameStateData data = JsonUtility.FromJson<GameStateData>(json);
 
-        // Appliquem l'estat
+        // Apliquem l'estat carregat al GameManager
         GameManager.Instance.LoadState(data);
         return true;
     }
