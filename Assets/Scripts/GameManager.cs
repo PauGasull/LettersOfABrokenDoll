@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
         float delay = LetterDataLoader.Instance.letterMetaData[currentCompositionId].delay_seconds;
         // Programem la invocació de DeliverResponse després del delay
         Invoke(nameof(DeliverResponse), delay);
-
+        
         // Guardem la partida si deleteSaveState està desactivat
         SaveSystem.SaveGame();
     }
@@ -168,10 +168,17 @@ public class GameManager : MonoBehaviour
                 if (responseTemplate.responses.TryGetValue(blockId, out var resp))
                     fullReply += resp.content + "\n";
 
-            /* letterUI.ShowResponse(fullReply);*/ 
+            /* letterUI.ShowResponse(fullReply);*/
+
+            // Mostrem la carta rebuda per consola
+            Debug.Log($"Carta rebuda:\n{fullReply}");
+
         }
         else
-            Debug.LogWarning($"No path {{pathKey}} found");
+            Debug.LogWarning($"No path '{pathKey}' found");
+
+        CurrentState = GameState.ReadingResponse;
+        Debug.Log(CurrentState);
     }
 
     /***
