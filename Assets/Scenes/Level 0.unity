@@ -433,9 +433,9 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.039693624
+    x: 0.04012057
     y: 0
-    width: 0.92061275
+    width: 0.91975886
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -1408,13 +1408,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96bb7b4bb80488c4a8cf9d937d9142bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialState: 1
   currentCompositionId: COM001
   currentTemplate:
     root_block: 
   currentBlockId: 
   choicePath: []
   letterBuffer: 
-  letterUI: {fileID: 2048171465}
+  deleteSaveState: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
