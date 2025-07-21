@@ -1,8 +1,8 @@
 {
   "COM001": {
-	"delay_seconds": 3600
+	"delay_seconds": 2
   },
   "COM002": {
-	"delay_seconds": 86400 
+	"delay_seconds": 5 
   }
 }
