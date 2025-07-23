@@ -5,48 +5,43 @@ using System.Collections.Generic;
 
 public class LetterUIManager : MonoBehaviour
 {
-    public TMP_Text letterDisplay;
-    public TMP_Text promptText;
-    public Transform optionContainer;
-    public GameObject optionButtonPrefab;
-    public TMP_Text responseText;
+    public GameObject letterAlertIcon;
+    [ReadOnly] public bool isOpen;
 
-    public void SetLetter(string text)
+    [Header("Letter UI")]
+    public Canvas letterCanvas;
+    public TMP_Text letterText;
+    public GameObject letterObject;
+
+    [Header("Options")]
+    public GameObject promptArea;
+    public GameObject promptContainer;
+    public Input promptInput;
+
+    private void Update()
     {
-        letterDisplay.text = text;
+        // Mostrem la icona de 
+        if (letterAlertIcon != null)
+            letterAlertIcon.SetActive(GameManager.Instance.CurrentState == GameState.ResponseReceived);
     }
 
-    public void AppendLetter(string text)
+    public void OpenLetter()
     {
-        letterDisplay.text += text;
+        if (isOpen)
+            return;
+
+        // GameManager.Instance.BeginWriting();
+        Debug.Log("Letter Opened");
     }
 
-    public void ShowPrompt(string prompt, Dictionary<string, CompositionOption> options)
+    public void CloseLetter()
     {
-        promptText.text = prompt;
-        responseText.text = "";
-        foreach (Transform child in optionContainer) Destroy(child.gameObject);
+        if (!isOpen)
+            return;
 
-        foreach (var kv in options)
-        {
-            GameObject btnObj = Instantiate(optionButtonPrefab, optionContainer);
-            TMP_Text btnText = btnObj.GetComponentInChildren<TMP_Text>();
-            btnText.text = $"{kv.Key}) {kv.Value.short_text}";
-
-            Button btn = btnObj.GetComponent<Button>();
-            string opt = kv.Key;
-            btn.onClick.AddListener(() => GameManager.Instance.SelectOption(opt));
-        }
+        // GameManager.Instance.SubmitLetter();
+        Debug.Log("Letter Closed");
     }
 
-    public void ShowWaiting()
-    {
-        promptText.text = "Wating response...";
-        foreach (Transform child in optionContainer) Destroy(child.gameObject);
-    }
-
-    public void ShowResponse(string reply)
-    {
-        responseText.text = reply;
-    }
+    // Detectar quan l'user escull opcio i 
 }
