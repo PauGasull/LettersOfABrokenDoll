@@ -604,8 +604,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 93.849976, y: -65.59}
-  m_SizeDelta: {x: 177.63, y: 134.29}
+  m_AnchoredPosition: {x: 271.59998, y: -130.38}
+  m_SizeDelta: {x: 380.77, y: 243.93}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &691117572
 MonoBehaviour:
@@ -1026,8 +1026,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -132.43, y: -72.19}
-  m_SizeDelta: {x: 146.25, y: 93.81}
+  m_AnchoredPosition: {x: -370.63, y: -216.9}
+  m_SizeDelta: {x: 420.32, y: 244.06}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1377915338
 MonoBehaviour:
@@ -1391,11 +1391,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2e3779011f92a4e80b5a8fc7712106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  letterDisplay: {fileID: 0}
-  promptText: {fileID: 0}
-  optionContainer: {fileID: 0}
-  optionButtonPrefab: {fileID: 0}
-  responseText: {fileID: 0}
+  letterAlertIcon: {fileID: 1023681598}
+  isOpen: 0
+  letterCanvas: {fileID: 0}
+  letterText: {fileID: 0}
+  letterObject: {fileID: 0}
+  promptArea: {fileID: 0}
+  promptContainer: {fileID: 0}
 --- !u!114 &2048171466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1408,14 +1410,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96bb7b4bb80488c4a8cf9d937d9142bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialState: 1
   currentCompositionId: COM001
   currentTemplate:
     root_block: 
   currentBlockId: 
   choicePath: []
   letterBuffer: 
-  deleteSaveState: 0
+  deleteSaveState: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1428,6 +1429,6 @@ SceneRoots:
   - {fileID: 366764934}
   - {fileID: 182887756}
   - {fileID: 1388050755}
-  - {fileID: 484388847}
   - {fileID: 2048171464}
   - {fileID: 1484335822}
+  - {fileID: 484388847}
