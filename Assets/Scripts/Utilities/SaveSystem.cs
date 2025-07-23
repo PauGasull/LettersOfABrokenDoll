@@ -79,33 +79,44 @@ public static class SaveSystem
     ***/
     public static bool LoadGame()
     {
-        // Si deleteSaveState està actiu, eliminem els saves i no carreguem
+        // si deleteSaveState està actiu eliminem l'arxiu 
         if (GameManager.Instance != null && GameManager.Instance.deleteSaveState)
         {
             DeleteAllSaveFiles();
             return false;
         }
 
-        // Si el fitxer no existeix, no tenim res a carregar
+        // Si no hi ha res a carregar...
         if (!File.Exists(SavePath))
             return false;
 
-        // Llegim totes les línies del fitxer
-        string[] lines = File.ReadAllLines(SavePath);
+        // Llegim tot el fitxer com a text
+        string content = File.ReadAllText(SavePath);
 
-        // Trobem l'index de WARNING i a partir de la següent línia comença el JSON
-        int start = Array.IndexOf(lines, WARNING) + 1;
-        // Trobem l'index de FOOTER per saber on acaba el JSON
-        int end   = Array.IndexOf(lines, FOOTER);
+        // Trobem el primer '{' i l'ultim '}' per delimitar el JSON
+        int start = content.IndexOf('{');
+        int end   = content.LastIndexOf('}');
+        if (start < 0 || end < 0 || end <= start)
+        {
+            Debug.LogError("Could not locate JSON in save file");
+            return false;
+        }
 
-        // Extreiem el JSON entre les línies start i end
-        string json = string.Join("\n", lines, start, end - start);
+        // Extraiem el json
+        string json = content.Substring(start, end - start + 1);
 
-        // Convertim el JSON a un data object
-        GameStateData data = JsonUtility.FromJson<GameStateData>(json);
-
-        // Apliquem l'estat carregat al GameManager
-        GameManager.Instance.LoadState(data);
-        return true;
+        // Parse JSON
+        try
+        {
+            GameStateData data = JsonUtility.FromJson<GameStateData>(json);
+            GameManager.Instance.LoadState(data);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Failed to parse save JSON: {ex.Message}");
+            return false;
+        }
     }
+
 }
