@@ -4,215 +4,197 @@ using UnityEngine;
 // Estat general del joc
 public enum GameState
 {
-    WritingLetter,   // L'usuari ha d'escriure la carta
-    WaitingResponse, // L'usuari està esperant una carta
-    ResponseRecived, // L'usuari ha rebut una carta, no l'ha llegit encara
-    ReadingResponse  // L'usuari està llegint la carta
+    WaitingResponse,    // 1. Esperant la resposta
+    ResponseReceived,   // 2. Resposta rebuda però no llegida
+    PendingWriteLetter, // 3. Pendent escriure una carta
+    WritingLetter,      // 4. Escrivint la carta
+    ReadingResponse     // 5. Llegint la resposta
 }
 
-// TO DO: Letter UI Connection
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; } // Instància singleton per accés global
-    public GameState CurrentState { get; private set; }      // Estat actual del joc
+    public GameState CurrentState { get; private set; } // Estat actual del joc
 
-    public GameState initialState = GameState.WaitingResponse; // Estat inicial en començar una nova partida
-    public string currentCompositionId = "COM001";             // ID de la composició JSON actual
-    public CompositionTemplate currentTemplate;                // Dades de la composició carregada
-    public string currentBlockId;                              // Bloc actual dins la composició
+    public string currentCompositionId = "COM001"; // ID de la carta o composició actual
+    public CompositionTemplate currentTemplate; // Dades de la composició carregada
+    public string currentBlockId; // ID del bloc actual dins la composició
 
-    public List<string> choicePath = new(); // Seqüència d'opcions triades pel jugador
-    public string letterBuffer = "";        // Buffer de text de la carta
+    public List<string> choicePath = new(); // Seqüència d'opcions escollides
+    [ReadOnly]
+    public string letterBuffer = ""; // Text acumulat de la carta del jugador
 
-    public bool deleteSaveState; // Flag per eliminar i desactivar els saves
+    public bool deleteSaveState; // Flag per esborrar la partida
 
     /***
-    * Awake(): Preparem el Sigleton
+    * Awake(): Prepara el singleton
     * PRE: --
-    * POST: Garantim que només hi hagi una instància de GameManager
+    * POST: Només queda una instància de GameManager
     ***/
     private void Awake()
     {
-        // Si ja hi ha una instància, eliminem el duplicat
-        if (Instance != null)
+        if (Instance != null) // si ja tenim una instància
         {
             Destroy(gameObject);
-            Debug.Log("Sigleton Forced");
             return;
         }
-        // Assignem la instància
+
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     /***
-    * Start(): Iniciem la partida
+    * Start(): Inicia la partida, nova o carregada
     ***/
-    private void Start()
-    {
-        StartNewGame();
-    }
+    private void Start() { StartNewGame(); }
 
     /***
-    * StartNewGame(): Inicia una nova partida o carrega l'estat desat
+    * StartNewGame(): Carrega o inicialitza nova partida
     * PRE: --
-    * POST: Si deleteSaveState és actiu esborra saves; si hi ha una partida desada, la carrega; 
-    *       altrament, inicialitza una de nova i envia la primera carta
+    * POST: Carrega estat o envia primera carta
     ***/
     public void StartNewGame()
     {
-        // Si deleteSaveState està actiu, eliminem tots els fitxers de desament
-        if (deleteSaveState)
+        if (deleteSaveState) // si està marcat, eliminem les partides guardades
             SaveSystem.DeleteAllSaveFiles();
 
-        // Carreguem la partida; si funciona, no fem res més
         if (SaveSystem.LoadGame())
-            return;
+            return;  // Estat carregat, surt
 
-        Debug.Log("No Game Loaded");
+        // Neteja historial per nova partida
+        choicePath.Clear();
+        letterBuffer = string.Empty;
 
-        // Només carreguem template si existeix (és una carta del jugador)
-        if (LetterDataLoader.Instance.compositionData.ContainsKey(currentCompositionId))
-        {
-            currentTemplate = LetterDataLoader.Instance.compositionData[currentCompositionId];
-            currentBlockId = currentTemplate.root_block;
-            CurrentState = GameState.WritingLetter;
-        }
-        else
-        {
-            // Si no hi ha composició, vol dir que és una carta automàtica de Ku'umi
-            CurrentState = GameState.WaitingResponse;
-            SubmitLetter();
-        }
-        
-        choicePath.Clear(); // Netejem qualsevol historial d'opcions
-        letterBuffer = ""; // Resetejem el buffer de la carta
-
-        // Posem el joc en estat inicial
-        CurrentState = initialState;
-        Debug.Log("Current State: " + CurrentState);
-
-        // Enviem la primera carta sense necessitat de path
+        // Comença esperant la primera carta
+        CurrentState = GameState.WaitingResponse;
         SubmitLetter();
     }
 
     /***
-    * SelectOption(): Gestiona l'opció triada pel jugador
-    * PRE: optionId és vàlid (A, B, C...)
-    * POST: Actualitza path, buffer i avança al següent bloc o envia la carta
+    * SubmitLetter(): Envia la carta (o sol·licitud) i programa la resposta
+    * PRE: --
+    * POST: Estat passa a WaitingResponse i invoca DeliverResponse després del delay
+    ***/
+    private void SubmitLetter()
+    {
+        CurrentState = GameState.WaitingResponse; // Canvi d'estat
+        float delay = LetterDataLoader.Instance.letterMetaData[currentCompositionId].delay_seconds; // Obtenim el delay
+        Invoke(nameof(DeliverResponse), delay); // Invoquem passat el temps
+    }
+
+    /***
+    * DeliverResponse(): Rebre la resposta
+    * PRE: Estat WaitingResponse
+    * POST: Estat passa a ResponseReceived, es mostra resposta, després ReadingResponse
+    ***/
+    private void DeliverResponse()
+    {
+        // Rebem la resposta
+        CurrentState = GameState.ResponseReceived;
+
+        string pathKey = string.Join("_", choicePath); // Ajuntem les opcions
+        var template = LetterDataLoader.Instance.responseData[currentCompositionId]; // Busquem la template
+        string fullReply = string.Empty; // inicialitzem resposta
+
+        if (template.paths.TryGetValue(pathKey, out var responsePath)) // si obtenim valor...
+        {
+            foreach (var blockId in responsePath.blocks) // Per cada bloc de la resposta
+            {
+                if (template.responses.TryGetValue(blockId, out var resp)) // si es accessible
+                    fullReply += resp.content + "\n"; // concatenem
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"No s'ha trobat path '{pathKey}'"); // Si no, mostrem un avís
+            fullReply = "NO PATH FOUND";
+        }
+
+        Debug.Log("Carta Rebuda:\n" + $"{fullReply}".Size(15).Italic());
+        // letterUI.ShowResponse(fullReply);
+
+        // CurrentState = GameState.ReadingResponse;
+        SaveSystem.SaveGame(); // guardem partida
+    }
+
+    
+    /***
+    * FinishReading(): S'activa quan l'usuari tanca la lectura
+    * PRE: Estat ReadingResponse
+    * POST: Estat passa a PendingWriteLetter
+    ***/
+    public void FinishReading()
+    {
+        if (CurrentState == GameState.ReadingResponse)
+            CurrentState = GameState.PendingWriteLetter;
+    }
+
+    /***
+    * BeginWriting(): Prepara l'escriptura de la següent carta
+    * PRE: Estat PendingWriteLetter
+    * POST: Carrega composició i estat WritingLetter
+    ***/
+    public void BeginWriting(string compositionId)
+    {
+        if (!LetterDataLoader.Instance.compositionData.ContainsKey(compositionId))
+        {
+            Debug.LogError($"No composition per {compositionId}".Bold().Color("#fa8b8bff"));
+            return;
+        }
+
+        currentCompositionId = compositionId;
+        currentTemplate = LetterDataLoader.Instance.compositionData[compositionId];
+        currentBlockId = currentTemplate.root_block;
+        choicePath.Clear();
+        letterBuffer = string.Empty;
+        CurrentState = GameState.WritingLetter;
+    }
+
+    /***
+    * SelectOption(): Afegeix opció, acumula text i envia si és l'última
+    * PRE: Estat WritingLetter
+    * POST: Pot cridar SubmitLetter o avançar bloc
     ***/
     public void SelectOption(string optionId)
     {
-        // Obtenim l'opció seleccionada a partir del bloc actual
+        // Si no estem en estat d'escriptura, no fem res
+        if (CurrentState != GameState.WritingLetter)
+            return; // Sortim de la funció
+
+        // Obtenim l'objecte CompositionOption corresponent a l'ID d'opció
         var option = currentTemplate.blocks[currentBlockId].options[optionId];
-        // Afegim la ID de l'opció al historial de camí
-        choicePath.Add(optionId);
-        // Afegim el text llarg de l'opció al buffer de la carta
-        letterBuffer += option.long_text;
+        choicePath.Add(optionId); // Afegim l'ID de l'opció al camí de respostes
+        letterBuffer += option.long_text; // Afegim el text llarg de l'opció al buffer de la carta
 
-        // Si no hi ha següent bloc, enviem la carta; altrament, avancem al proper bloc
+        // Si no hi ha bloc següent
         if (option.next == null)
-            SubmitLetter();
-        else
-            currentBlockId = option.next;
+            SubmitLetter(); // enviem
+        else // si hi ha
+            currentBlockId = option.next; // Anem al següent bloc
     }
 
     /***
-    * GetCurrentPrompt(): Retorna el text del prompt del bloc actual
-    ***/
-    public string GetCurrentPrompt()
-    {
-        // Retornem la string del prompt del bloc actual
-        return currentTemplate.blocks[currentBlockId].prompt;
-    }
-
-    /***
-    * GetCurrentOptions(): Retorna les opcions disponibles del bloc actual
-    ***/
-    public Dictionary<string, CompositionOption> GetCurrentOptions()
-    {
-        // Retornem el diccionari d'opcions per al bloc actual
-        return currentTemplate.blocks[currentBlockId].options;
-    }
-
-    /***
-    * SubmitLetter(): Envia la carta i programa la resposta
-    * PRE: --
-    * POST: Canvia l'estat a WaitingResponse i desa la partida (si deleteSaveState és fals)
-    ***/
-    void SubmitLetter()
-    {
-        // Canviem l'estat a WaitingResponse
-        CurrentState = GameState.WaitingResponse;
-        // Obtenim el delay definit a la metadata
-        float delay = LetterDataLoader.Instance.letterMetaData[currentCompositionId].delay_seconds;
-        // Programem la invocació de DeliverResponse després del delay
-        Invoke(nameof(DeliverResponse), delay);
-    }
-
-    /***
-    * DeliverResponse(): Mostra la resposta un cop passat el delay
-    * PRE: --
-    * POST: Canvia l'estat a ResponseRecived i concatena la resposta corresponent al path
-    ***/
-    void DeliverResponse()
-    {
-        // Canviem l'estat a ResponseRecived perquè s'ha rebut una carta
-        CurrentState = GameState.ResponseRecived;
-
-        // Creem la clau del path buscant amb underscore
-        string pathKey = string.Join("_", choicePath);
-        // Obtenim la plantilla de resposta segons la composició actual
-        var responseTemplate = LetterDataLoader.Instance.responseData[currentCompositionId];
-
-        if (responseTemplate.paths.TryGetValue(pathKey, out var responsePath))
-        {
-            // Concatenem el contingut de cada bloc de la resposta
-            string fullReply = "";
-            foreach (string blockId in responsePath.blocks)
-                if (responseTemplate.responses.TryGetValue(blockId, out var resp))
-                    fullReply += resp.content + "\n";
-
-            /* letterUI.ShowResponse(fullReply);*/
-
-            // Mostrem la carta rebuda per consola
-            Debug.Log($"Letter Recived:\n{fullReply}");
-
-
-        }
-        else
-            Debug.LogWarning($"No path '{pathKey}' found");
-
-        CurrentState = GameState.ReadingResponse;
-        Debug.Log("Current State: " + CurrentState);
-                
-        // Guardem la partida
-        SaveSystem.SaveGame();
-    }
-
-    /***
-    * LoadState(): Aplica un estat carregat al joc
-    * PRE: data obtinguda de SaveSystem.LoadGame()
-    * POST: Restaura l'estat intern i actualitza la UI
+    * LoadState(): Aplica l'estat carregat des de JSON
+    * PRE: data ha estat parsejat correctament
+    * POST: Restaura tots els camps del GameManager i l'estat de joc
     ***/
     public void LoadState(GameStateData data)
     {
-        // Restaurem la ID de la composició
+        // Restaurem la ID de composició
         currentCompositionId = data.compositionId;
-        // Recarreguem la plantilla de la composició
-        currentTemplate = LetterDataLoader.Instance.compositionData[currentCompositionId];
 
-        currentBlockId = data.blockId; // Restaurem el bloc actual
-        choicePath = new List<string>(data.path); // Restaurem l'historial de resposte
-        letterBuffer = data.letter; // Restaurem el buffer de la carta
-        CurrentState = data.state; // Restaurem l'estat del joc
+        // Si existeix composició, carreguem la plantilla i bloc
+        if (LetterDataLoader.Instance.compositionData.ContainsKey(currentCompositionId))
+        {
+            currentTemplate = LetterDataLoader.Instance.compositionData[currentCompositionId];
+            currentBlockId = data.blockId;
+        }
 
-        /* letterUI.SetLetter(letterBuffer);
+        // Restaurem el camí de respostes i buffer de text
+        choicePath = new List<string>(data.path);
+        letterBuffer = data.letter;
 
-        if (CurrentState == GameState.WritingLetter)
-            letterUI.ShowPrompt(GetCurrentPrompt(), GetCurrentOptions());
-        else if (CurrentState == GameState.WaitingResponse)
-            letterUI.ShowWaiting();
-        else
-            DeliverResponse();*/
+        // Restaurem l'estat del joc
+        CurrentState = data.state;
     }
 }
