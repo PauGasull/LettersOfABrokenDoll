@@ -33,7 +33,7 @@
 
 ## 📜 License
 
-See [LICENSE.md](LICENSE) for details.
+See [LICENSE](LICENSE.md) for details.
 
 ## 🤝 Credits
 
