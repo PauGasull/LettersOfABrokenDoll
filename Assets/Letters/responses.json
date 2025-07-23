@@ -1,40 +1,53 @@
 {
   "COM001": {
     "paths": {
-      "": {
-        "blocks": ["INIT"]
-      },
-      "A_A_A": {
-        "blocks": ["R1", "R2", "R3"]
-      },
-      "A_B_C": {
-        "blocks": ["R4", "R5"]
-      },
-      "B_C_B": {
-        "blocks": ["R6"]
-      }
+      "": { "blocks": ["HI1"] }
     },
     "responses": {
-      "INIT": {
-        "content": "Hola! \n "
+      "HI1": {
+        "content": "Hola,\nEm dic Ku’umi. Alguns em coneixen com Hope. Visc en un lloc estrany, però de moment no t’amoïnis per això.\n\nHe rebut el teu nom a través d’algú que confio. Voldria conèixer-te millor.\n\nDigues... quins són els teus interessos?"
+      }
+    }
+  },
+  "COM003": {
+    "paths": {
+      "A": { "blocks": ["R_MUSIC", "R_FRIEND"] },
+      "B": { "blocks": ["R_GAMES", "R_FRIEND"] },
+      "C": { "blocks": ["R_NATURE", "R_FRIEND"] }
+    },
+    "responses": {
+      "R_MUSIC": {
+        "content": "La música clàssica... quin món més pur i intens. Jo toco la flauta de bambú. M’encantaria compartir alguna peça amb tu algun dia."
       },
-      "R1": {
-        "content": "Hola de nou… em preocupa la teva sacsejada."
+      "R_GAMES": {
+        "content": "Videojocs? No en sé gaire, però en Aylandi jugava a un de misteris… tenia una estètica preciosa. Recordo com em feia riure."
       },
-      "R2": {
-        "content": "Vols explicar-me per què tremoles?"
+      "R_NATURE": {
+        "content": "M’encanta la natura també. Quan puc, camino pel bosc del sud. Hi ha un lloc on les arrels fan música."
       },
-      "R3": {
-        "content": "Estic aquí, escoltant-te atentament."
+      "R_FRIEND": {
+        "content": "Et confesso una cosa... trobo molt a faltar una amiga. Fa temps que no sé res d’ella. El món ha canviat molt.\nEt passa mai, que sents que algú encara hi és, tot i no veure’l?"
+      }
+    }
+  },
+  "COM005": {
+    "paths": {
+      "A": { "blocks": ["SUPPORT", "JAPAN"] },
+      "B": { "blocks": ["QUESTION", "JAPAN"] },
+      "C": { "blocks": ["SHARE", "JAPAN"] }
+    },
+    "responses": {
+      "SUPPORT": {
+        "content": "Gràcies... llegir les teves paraules m'ha confortat més del que esperava."
       },
-      "R4": {
-        "content": "L'objecte estrany brilla amb una llum tènue."
+      "QUESTION": {
+        "content": "Potser t’ho explicaré més endavant. Ara mateix no puc parlar-ne obertament, però m’agrada saber que t’interessa."
       },
-      "R5": {
-        "content": "Creus que pot ser un missatge ocult?"
+      "SHARE": {
+        "content": "Sento molt la teva pèrdua… potser les nostres històries no són tan diferents."
       },
-      "R6": {
-        "content": "La por és una companya fidel de la nit."
+      "JAPAN": {
+        "content": "Aviat marxaré cap al Japó. És per una missió. Et podria enviar fotos, si vols. Les postes de sol allà són famoses."
       }
     }
   }

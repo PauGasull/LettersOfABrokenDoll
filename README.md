@@ -20,15 +20,18 @@
 * **Multiple endings** driven by emotional bonds and political actions.
 * **Accessibility**: monospaced font choices, adjustable typing speed, and separate volume controls.
 
-## 🛠 Project Structure (temporal)
+## 🛠 Project Structure
 
 ```
-├── assets/            # Graphics, sounds, and fonts
-├── docs/              # Design documents and references
-├── scenes/            # Godot scenes (.tscn)
-├── scripts/           # GDScript logic
-├── translations/      # Localization files (CAT, ENG, ESP…)
-└── README.md          # Main project documentation
+Assets/
+├── Icons/            # Game icon, splash-screen, logos, etc...
+├── Letters/          # JSONs files containing all letter information
+├── Scenes/           # Unity scenes and some specific configuration if needed
+├── Scripts/          # C# game logic, Custom editor scripts, and other utilities 
+├── Settings/         # Global unity settings such as Renderer2D, Universal RP
+├── Sprites/          # In-Game Graphics 
+├── TextMesh Pro/     # Unity's Text Mesh Pro asset files 
+└── Other files
 ```
 
 ## 📜 License
@@ -39,3 +42,4 @@ See [LICENSE](LICENSE.md) for details.
 
 * **Pau Gasull** · Programmer
 * **Roc “Ondo” Humet** · Writer
+* **Bunny83** · [SimpleJson.cs](https://github.com/Bunny83/SimpleJSON/blob/master/SimpleJSON.cs)
