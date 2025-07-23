@@ -1,5 +1,5 @@
 {
-  "COM001": { "delay_seconds": 0 }, 
+  "COM001": { "delay_seconds": 2 }, 
   "COM003": { "delay_seconds": 2 },
   "COM005": { "delay_seconds": 2 }
 }
