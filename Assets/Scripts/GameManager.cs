@@ -70,19 +70,26 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("No Game Loaded");
 
-        // Carreguem la template des del data loader
-        currentTemplate = LetterDataLoader.Instance.compositionData[currentCompositionId];
-        // Posem el bloc actual a l'arrel de la composició
-        currentBlockId = currentTemplate.root_block;
-
-        // Netejem qualsevol historial d'opcions
-        choicePath.Clear();
-        // Resetejem el buffer de la carta
-        letterBuffer = "";
+        // Només carreguem template si existeix (és una carta del jugador)
+        if (LetterDataLoader.Instance.compositionData.ContainsKey(currentCompositionId))
+        {
+            currentTemplate = LetterDataLoader.Instance.compositionData[currentCompositionId];
+            currentBlockId = currentTemplate.root_block;
+            CurrentState = GameState.WritingLetter;
+        }
+        else
+        {
+            // Si no hi ha composició, vol dir que és una carta automàtica de Ku'umi
+            CurrentState = GameState.WaitingResponse;
+            SubmitLetter();
+        }
+        
+        choicePath.Clear(); // Netejem qualsevol historial d'opcions
+        letterBuffer = ""; // Resetejem el buffer de la carta
 
         // Posem el joc en estat inicial
         CurrentState = initialState;
-        Debug.Log("CurrentState: " + CurrentState);
+        Debug.Log("Current State: " + CurrentState);
 
         // Enviem la primera carta sense necessitat de path
         SubmitLetter();
@@ -140,9 +147,6 @@ public class GameManager : MonoBehaviour
         float delay = LetterDataLoader.Instance.letterMetaData[currentCompositionId].delay_seconds;
         // Programem la invocació de DeliverResponse després del delay
         Invoke(nameof(DeliverResponse), delay);
-        
-        // Guardem la partida si deleteSaveState està desactivat
-        SaveSystem.SaveGame();
     }
 
     /***
@@ -171,14 +175,18 @@ public class GameManager : MonoBehaviour
             /* letterUI.ShowResponse(fullReply);*/
 
             // Mostrem la carta rebuda per consola
-            Debug.Log($"Carta rebuda:\n{fullReply}");
+            Debug.Log($"Letter Recived:\n{fullReply}");
+
 
         }
         else
             Debug.LogWarning($"No path '{pathKey}' found");
 
         CurrentState = GameState.ReadingResponse;
-        Debug.Log(CurrentState);
+        Debug.Log("Current State: " + CurrentState);
+                
+        // Guardem la partida
+        SaveSystem.SaveGame();
     }
 
     /***
@@ -193,14 +201,10 @@ public class GameManager : MonoBehaviour
         // Recarreguem la plantilla de la composició
         currentTemplate = LetterDataLoader.Instance.compositionData[currentCompositionId];
 
-        // Restaurem el bloc actual
-        currentBlockId = data.blockId;
-        // Restaurem l'historial de respostes
-        choicePath = new List<string>(data.path);
-        // Restaurem el buffer de la carta
-        letterBuffer = data.letter;
-        // Restaurem l'estat del joc
-        CurrentState = data.state;
+        currentBlockId = data.blockId; // Restaurem el bloc actual
+        choicePath = new List<string>(data.path); // Restaurem l'historial de resposte
+        letterBuffer = data.letter; // Restaurem el buffer de la carta
+        CurrentState = data.state; // Restaurem l'estat del joc
 
         /* letterUI.SetLetter(letterBuffer);
 
