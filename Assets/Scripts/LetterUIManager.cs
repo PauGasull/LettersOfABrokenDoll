@@ -14,9 +14,15 @@ public class LetterUIManager : MonoBehaviour
     public GameObject letterObject;
 
     [Header("Options")]
-    public GameObject promptArea;
-    public GameObject promptContainer;
-    public Input promptInput;
+    public HorizontalOrVerticalLayoutGroup promptArea;
+    public TMP_InputField promptInput;
+
+
+    private void Start()
+    {
+        toggleCanvas(false);
+        togglePromptArea(false);
+    }
 
     private void Update()
     {
@@ -31,6 +37,7 @@ public class LetterUIManager : MonoBehaviour
             return;
 
         // GameManager.Instance.BeginWriting();
+        toggleCanvas(true);
         Debug.Log("Letter Opened");
     }
 
@@ -40,8 +47,22 @@ public class LetterUIManager : MonoBehaviour
             return;
 
         // GameManager.Instance.SubmitLetter();
+        toggleCanvas(false);
         Debug.Log("Letter Closed");
     }
 
-    // Detectar quan l'user escull opcio i 
+    public void setLetterText(string text)
+    {
+        letterText.text = text;
+    }
+
+    private void toggleCanvas(bool state)
+    {
+        letterCanvas.enabled = state;
+    }
+
+    private void togglePromptArea(bool state)
+    {
+        promptArea.gameObject.SetActive(state);
+    }
 }
