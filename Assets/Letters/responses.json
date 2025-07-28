@@ -1,54 +1,23 @@
 {
   "COM001": {
     "paths": {
-      "": { "blocks": [ "HI1" ] }
+      "A_A_A": {
+      "blocks": [ "R1", "R2", "R3" ]
+      },
+      "A_B_C": {
+      "blocks": [ "R4", "R5" ]
+      },
+      "B_C_B": {
+      "blocks": [ "R6" ]
+      }
     },
     "responses": {
-      "HI1": {
-        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tincidunt ut augue vel sollicitudin. \nProin gravida tristique euismod. Cras congue metus et euismod cursus. Maecenas commodo eros id tellus congue bibendum. Praesent pretium urna diam, sit amet ullamcorper magna sollicitudin eu. Sed lacinia aliquam facilisis. Morbi sit amet dui maximus, efficitur eros ac, tincidunt justo. Morbi aliquet nunc nec justo malesuada eleifend.\nSuspendisse potenti. Maecenas venenatis a eros quis egestas. Morbi semper malesuada auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis nibh enim, nec fringilla tellus pellentesque in. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus sit amet iaculis leo. \n\nQuisque non mauris lectus. Vivamus sollicitudin velit id iaculis ullamcorper. Nam diam eros, viverra sit amet vehicula sit amet, aliquet eget erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse pellentesque tellus sit amet enim consectetur accumsan et eget nibh. \nFusce iaculis ex vitae felis rutrum vulputate. Ut non volutpat dolor. Cras non mauris eu mauris consectetur ultricies ac vitae velit. Proin vel purus velit.\n\nProin at nulla enim. Fusce sed neque orci. Praesent at neque quam. Phasellus molestie blandit dictum. \nPellentesque dapibus, diam quis sollicitudin rhoncus, elit odio hendrerit mi, vel lacinia odio lectus at enim. Nulla sagittis enim non mi tincidunt, sed ultrices turpis posuere. \nCurabitur et enim tempus, rutrum nibh et, accumsan tortor. Duis vel molestie nisl. Nam posuere ex et accumsan dictum. In bibendum neque et vehicula rutrum. Nulla sodales euismod lacus nec lobortis.\n\n"
-      }
-    }
-  },
-  "COM003": {
-    "paths": {
-      "A": { "blocks": ["R_MUSIC", "R_FRIEND"] },
-      "B": { "blocks": ["R_GAMES", "R_FRIEND"] },
-      "C": { "blocks": ["R_NATURE", "R_FRIEND"] }
-    },
-    "responses": {
-      "R_MUSIC": {
-        "content": "La música clàssica... quin món més pur i intens. Jo toco la flauta de bambú. M’encantaria compartir alguna peça amb tu algun dia."
-      },
-      "R_GAMES": {
-        "content": "Videojocs? No en sé gaire, però en Aylandi jugava a un de misteris… tenia una estètica preciosa. Recordo com em feia riure."
-      },
-      "R_NATURE": {
-        "content": "M’encanta la natura també. Quan puc, camino pel bosc del sud. Hi ha un lloc on les arrels fan música."
-      },
-      "R_FRIEND": {
-        "content": "Et confesso una cosa... trobo molt a faltar una amiga. Fa temps que no sé res d’ella. El món ha canviat molt.\nEt passa mai, que sents que algú encara hi és, tot i no veure’l?"
-      }
-    }
-  },
-  "COM005": {
-    "paths": {
-      "A": { "blocks": ["SUPPORT", "JAPAN"] },
-      "B": { "blocks": ["QUESTION", "JAPAN"] },
-      "C": { "blocks": ["SHARE", "JAPAN"] }
-    },
-    "responses": {
-      "SUPPORT": {
-        "content": "Gràcies... llegir les teves paraules m'ha confortat més del que esperava."
-      },
-      "QUESTION": {
-        "content": "Potser t’ho explicaré més endavant. Ara mateix no puc parlar-ne obertament, però m’agrada saber que t’interessa."
-      },
-      "SHARE": {
-        "content": "Sento molt la teva pèrdua… potser les nostres històries no són tan diferents."
-      },
-      "JAPAN": {
-        "content": "Aviat marxaré cap al Japó. És per una missió. Et podria enviar fotos, si vols. Les postes de sol allà són famoses."
-      }
+      "R1": { "content": "Hola de nou… em preocupa la teva sacsejada." },
+      "R2": { "content": "Vols explicar-me per què tremoles?" },
+      "R3": { "content": "Estic aquí, escoltant-te atentament." },
+      "R4": { "content": "L’objecte estrany brilla amb una llum tènue." },
+      "R5": { "content": "Creus que pot ser un missatge ocult?" },
+      "R6": { "content": "La por és una companya fidel de la nit." }
     }
   }
 }

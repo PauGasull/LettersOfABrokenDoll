@@ -1,48 +1,63 @@
 {
-  "COM002": {
-    "root_block": "INT1",
+  "COM001": {
+    "root_block": "P1",
     "blocks": {
-      "INT1": {
-        "prompt": "Quin d’aquests interessos t’identifica més?",
+      "P1": {
+        "prompt": "Comences la teva carta. Tria com salutaries Ku’umi:",
         "options": {
           "A": {
-            "short_text": "La música clàssica.",
-            "long_text": "Sempre he trobat consol en les melodies de la música clàssica.\n",
-            "next": null
+            "short_text": "Hola Ku’umi,",
+            "long_text": "Hola estimada Ku’umi,\n",
+            "next": "P2"
           },
           "B": {
-            "short_text": "Els videojocs.",
-            "long_text": "Els mons virtuals sovint m’ofereixen una escapada de la realitat.\n",
-            "next": null
+            "short_text": "Benvolguda Ku’umi,",
+            "long_text": "Benvolguda Ku’umi,\n",
+            "next": "P2"
           },
           "C": {
-            "short_text": "La natura.",
-            "long_text": "M’agrada perdre’m pels boscos i escoltar els ocells.\n",
-            "next": null
+            "short_text": "Ku’umi, saluts.",
+            "long_text": "Ku’umi, t’envio un afectuós salüt,\n",
+            "next": "P2"
           }
         }
-      }
-    }
-  },
-  "COM004": {
-    "root_block": "FRIEND1",
-    "blocks": {
-      "FRIEND1": {
-        "prompt": "Com reacciones al que t’explica Ku’umi?",
+      },
+      "P2": {
+        "prompt": "Explica com et trobes:",
         "options": {
           "A": {
-            "short_text": "Li ofereixes suport.",
-            "long_text": "Ho sento molt, Ku’umi. Sempre pots comptar amb mi.\n",
+            "short_text": "Em sento tremolós i nerviós.",
+            "long_text": "Actualment em sento tremolós i amb el cor accelerat, com si una tempesta interior em sacsegi.\n",
+            "next": "P3"
+          },
+          "B": {
+            "short_text": "He trobat un objecte estrany.",
+            "long_text": "He descobert un objecte estrany, cobert d’arrels i símbols desconeguts.\n",
+            "next": "P3"
+          },
+          "C": {
+            "short_text": "Estic sol/a en aquesta habitació.",
+            "long_text": "Em trobo sol·licitant companyia dins aquesta cambra silenciosa i freda.\n",
+            "next": "P3"
+          }
+        }
+      },
+      "P3": {
+        "prompt": "Finalitzes la carta amb:",
+        "options": {
+          "A": {
+            "short_text": "Amb esperança,",
+            "long_text": "Amb tota l’esperança del món,\n",
             "next": null
           },
           "B": {
-            "short_text": "Li preguntes per l’amiga.",
-            "long_text": "Què li va passar a la teva amiga? La pots trobar?\n",
+            "short_text": "Amb por,",
+            "long_text": "Amb la por com a llum fugissera,\n",
             "next": null
           },
           "C": {
-            "short_text": "Li comparteixes una experiència similar.",
-            "long_text": "Et comprenc… jo també vaig perdre algú que estimava.\n",
+            "short_text": "Amb curiositat,",
+            "long_text": "Amb curiositat insondable,\n",
             "next": null
           }
         }
