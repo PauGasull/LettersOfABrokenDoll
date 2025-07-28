@@ -26,9 +26,14 @@ public class LetterUIManager : MonoBehaviour
 
     private void Update()
     {
-        // Mostrem la icona de 
+        // Mostrem la icona de alerta
         if (letterAlertIcon != null)
             letterAlertIcon.SetActive(GameManager.Instance.CurrentState == GameState.ResponseReceived);
+    }
+
+    public void SetLetter(string letter)
+    {
+        letterText.text = letter;
     }
 
     public void OpenLetter()

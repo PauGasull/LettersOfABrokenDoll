@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Jobs;
 using UnityEngine;
 
 // Estat general del joc
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
     public List<string> choicePath = new(); // Seqüència d'opcions escollides
     [ReadOnly]
     public string letterBuffer = ""; // Text acumulat de la carta del jugador
+    public LetterUIManager letterUIManager;
 
     public bool deleteSaveState; // Flag per esborrar la partida
 
@@ -44,9 +46,16 @@ public class GameManager : MonoBehaviour
     }
 
     /***
-    * Start(): Inicia la partida, nova o carregada
+    * Start(): Inicialitza les referencies. Inicia la partida, nova o carregada
     ***/
-    private void Start() { StartNewGame(); }
+    private void Start() { 
+        // Referenciem    
+        if(letterUIManager == null)
+            letterUIManager = gameObject.GetComponent<LetterUIManager>();
+
+        // Iniciem el joc
+        StartNewGame(); 
+    }
 
     /***
     * StartNewGame(): Carrega o inicialitza nova partida
@@ -110,8 +119,8 @@ public class GameManager : MonoBehaviour
             fullReply = "NO PATH FOUND";
         }
 
-        Debug.Log("Carta Rebuda:\n" + $"{fullReply}".Size(15).Italic());
-        // letterUI.ShowResponse(fullReply);
+        Debug.Log("Carta Rebuda:\n" + $"{fullReply}".Size(13).Italic());
+        letterUIManager.setLetterText(fullReply); // letterUI.ShowResponse(fullReply);
 
         // CurrentState = GameState.ReadingResponse;
         SaveSystem.SaveGame(); // guardem partida

@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Projects\\Unity\\Letters of a Broken Doll\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Projects\\Unity\\Letters of a Broken Doll\\Assets\\Letters\\responses.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Letters\\responses.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{67A70CD8-BEA3-9552-B3B5-E8B3E5548831}|Assembly-CSharp.csproj|d:\\projects\\unity\\letters of a broken doll\\assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{67A70CD8-BEA3-9552-B3B5-E8B3E5548831}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{67A70CD8-BEA3-9552-B3B5-E8B3E5548831}|Assembly-CSharp.csproj|d:\\projects\\unity\\letters of a broken doll\\assets\\scripts\\letteruimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{67A70CD8-BEA3-9552-B3B5-E8B3E5548831}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\letteruimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "responses.json",
+              "DocumentMoniker": "D:\\Projects\\Unity\\Letters of a Broken Doll\\Assets\\Letters\\responses.json",
+              "RelativeDocumentMoniker": "Assets\\Letters\\responses.json",
+              "ToolTip": "D:\\Projects\\Unity\\Letters of a Broken Doll\\Assets\\Letters\\responses.json",
+              "RelativeToolTip": "Assets\\Letters\\responses.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAB8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-27T13:27:14.586Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GameManager.cs",
+              "DocumentMoniker": "D:\\Projects\\Unity\\Letters of a Broken Doll\\Assets\\Scripts\\GameManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\GameManager.cs",
+              "ToolTip": "D:\\Projects\\Unity\\Letters of a Broken Doll\\Assets\\Scripts\\GameManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\GameManager.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAAADUAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-27T13:10:33.074Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LetterUIManager.cs",
+              "DocumentMoniker": "D:\\Projects\\Unity\\Letters of a Broken Doll\\Assets\\Scripts\\LetterUIManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\LetterUIManager.cs",
+              "ToolTip": "D:\\Projects\\Unity\\Letters of a Broken Doll\\Assets\\Scripts\\LetterUIManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\LetterUIManager.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAABwAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-27T09:46:16.148Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

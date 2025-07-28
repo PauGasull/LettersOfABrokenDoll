@@ -1,11 +1,11 @@
 {
   "COM001": {
     "paths": {
-      "": { "blocks": ["HI1"] }
+      "": { "blocks": [ "HI1" ] }
     },
     "responses": {
       "HI1": {
-        "content": "Hola,\nEm dic Ku’umi. Alguns em coneixen com Hope. Visc en un lloc estrany, però de moment no t’amoïnis per això.\n\nHe rebut el teu nom a través d’algú que confio. Voldria conèixer-te millor.\n\nDigues... quins són els teus interessos?"
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tincidunt ut augue vel sollicitudin. \nProin gravida tristique euismod. Cras congue metus et euismod cursus. Maecenas commodo eros id tellus congue bibendum. Praesent pretium urna diam, sit amet ullamcorper magna sollicitudin eu. Sed lacinia aliquam facilisis. Morbi sit amet dui maximus, efficitur eros ac, tincidunt justo. Morbi aliquet nunc nec justo malesuada eleifend.\nSuspendisse potenti. Maecenas venenatis a eros quis egestas. Morbi semper malesuada auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis nibh enim, nec fringilla tellus pellentesque in. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus sit amet iaculis leo. \n\nQuisque non mauris lectus. Vivamus sollicitudin velit id iaculis ullamcorper. Nam diam eros, viverra sit amet vehicula sit amet, aliquet eget erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse pellentesque tellus sit amet enim consectetur accumsan et eget nibh. \nFusce iaculis ex vitae felis rutrum vulputate. Ut non volutpat dolor. Cras non mauris eu mauris consectetur ultricies ac vitae velit. Proin vel purus velit.\n\nProin at nulla enim. Fusce sed neque orci. Praesent at neque quam. Phasellus molestie blandit dictum. \nPellentesque dapibus, diam quis sollicitudin rhoncus, elit odio hendrerit mi, vel lacinia odio lectus at enim. Nulla sagittis enim non mi tincidunt, sed ultrices turpis posuere. \nCurabitur et enim tempus, rutrum nibh et, accumsan tortor. Duis vel molestie nisl. Nam posuere ex et accumsan dictum. In bibendum neque et vehicula rutrum. Nulla sodales euismod lacus nec lobortis.\n\n"
       }
     }
   },
